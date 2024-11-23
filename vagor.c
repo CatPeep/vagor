@@ -99,7 +99,7 @@ void walk(){
 			else if(pdir < 0)pdir+=4;
 			break;
 		case 1:
-			if(f > 40 && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
+			if(f > 170000/pt && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
 			else{
 				switch(pdir){
 					case 0:px+=0.000001*pt*ws;break;
@@ -108,13 +108,13 @@ void walk(){
 					case 3:py-=0.000001*pt*ws;break;}f++;}
 			break;
 		case 2:
-			if(abs(floor(pa*100)-157*pdir) > 5)pa-=0.000001*pt*ts;
-			else m=1;
+			if(abs(floor(pa*100)-157*pdir) != 0)pa-=0.000001*pt*ts;
+			else{pa = 1.57*pdir; m=1;}
 			if(pa < 0)pa+=2*3.14;
 			break;
 		case 3:
-			if(abs(floor(pa*100)-157*pdir) > 5)pa+=0.000001*pt*ts;
-			else m=1;
+			if(abs(floor(pa*100)-157*pdir) != 0)pa+=0.000001*pt*ts;
+			else{pa = 1.57*pdir; m=1;}
 			if(pa > 2*3.14)pa-=2*3.14;
 			break;
 	}
