@@ -108,12 +108,12 @@ void walk(){
 					case 3:py-=0.000001*pt*ws;break;}f++;}
 			break;
 		case 2:
-			if(abs(floor(pa*100)-157*pdir) != 0)pa-=0.000001*pt*ts;
+			if(abs(floor(pa*100)-157*pdir) > 2)pa-=0.000001*pt*ts;
 			else{pa = 1.57*pdir; m=1;}
 			if(pa < 0)pa+=2*3.14;
 			break;
 		case 3:
-			if(abs(floor(pa*100)-157*pdir) != 0)pa+=0.000001*pt*ts;
+			if(abs(floor(pa*100)-157*pdir) > 2)pa+=0.000001*pt*ts;
 			else{pa = 1.57*pdir; m=1;}
 			if(pa > 2*3.14)pa-=2*3.14;
 			break;
