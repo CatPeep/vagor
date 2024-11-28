@@ -19,8 +19,6 @@ make install
 ```  
   
 ## RUNNING IN YOUR TERMINAL
-```
-vagor
-```  
+```vagor```  
 
 <img src='preview.png'></img>
