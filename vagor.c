@@ -11,7 +11,8 @@ int gh=100,gw=100; //SET THESE TWO VALUES
 int grid[100][100];//TO THE SAME AS THESE VALUES FOR THE MAZE SIZE DEFAULT 100X100
 float px, py, fx, fy, pa = 0, fov = pi*85/180, ws = 1.8, ts = 2.5; //MODIFY WS FOR WALK SPEED AND TS FOR TURN SPEED FOV FOR THE FIELD OF VIEW IN RADIANS
 int pdir=0, m=0, f=0;
-clock_t st, pt;
+struct timespec start,passed;
+unsigned int tp;
 
 void clearmaze(){
 	for(int y = 0; y < gh; y++){
@@ -73,7 +74,8 @@ void genmaze(){
 }
 
 void walk(){
-	pt = clock()-st;
+	clock_gettime(CLOCK_MONOTONIC_RAW,&passed);
+	tp = (passed.tv_sec-start.tv_sec)*1000000+(passed.tv_nsec-start.tv_nsec)/1000;
 	switch(m){
 		case 0:
 			int u,v;
@@ -99,21 +101,21 @@ void walk(){
 			else if(pdir < 0)pdir+=4;
 			break;
 		case 1:
-			if(f > 170000/pt && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
+			if(f > 250 && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
 			else{
 				switch(pdir){
-					case 0:px+=0.000001*pt*ws;break;
-					case 1:py+=0.000001*pt*ws;break;
-					case 2:px-=0.000001*pt*ws;break;
-					case 3:py-=0.000001*pt*ws;break;}f++;}
+					case 0:px+=0.000001*ws*tp;break;
+					case 1:py+=0.000001*ws*tp;break;
+					case 2:px-=0.000001*ws*tp;break;
+					case 3:py-=0.000001*ws*tp;break;}f++;}
 			break;
 		case 2:
-			if(abs(floor(pa*100)-157*pdir) > 2)pa-=0.000001*pt*ts;
+			if(abs(floor(pa*100)-157*pdir) > 2)pa-=0.000001*ts*tp;
 			else{pa = 1.57*pdir; m=1;}
 			if(pa < 0)pa+=2*3.14;
 			break;
 		case 3:
-			if(abs(floor(pa*100)-157*pdir) > 2)pa+=0.000001*pt*ts;
+			if(abs(floor(pa*100)-157*pdir) > 2)pa+=0.000001*ts*tp;
 			else{pa = 1.57*pdir; m=1;}
 			if(pa > 2*3.14)pa-=2*3.14;
 			break;
@@ -125,7 +127,8 @@ float dist(float x1, float y1, float x2, float y2){
 }
 
 void draw(){
-        for(int x = 0; x < COLS; x++){
+        clock_gettime(CLOCK_MONOTONIC_RAW,&start);
+	for(int x = 0; x < COLS; x++){
                 float ang = pa-fov/2+fov*x/COLS;
 		if(ang < 0 && x == COLS/2) ang = fov/COLS;
                 if(ang > pi*2) ang -= pi*2;
@@ -201,7 +204,6 @@ int main(void){
 	init_pair(4,COLOR_MAGENTA,COLOR_MAGENTA);
 	genmaze();
 	while(1){
-		st = clock();
 		draw();
 		if(floor(px) != floor(fx) || floor(py) != floor(fy)) walk();
 		else genmaze((int)px);
