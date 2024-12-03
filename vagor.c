@@ -195,13 +195,13 @@ int main(void){
 	initscr();
 	curs_set(0);
 	start_color();
-	init_color(COLOR_GREEN,0,525,0);//       WALL COLOR
+	init_color(COLOR_BLUE,0,525,0);//       WALL COLOR
 	init_color(COLOR_CYAN,0,475,0);//        ALT WALL COLOR
-	init_color(COLOR_MAGENTA,200,200,200);// FLOOR COLOR
+	init_color(COLOR_YELLOW,200,200,200);// FLOOR COLOR
 	init_pair(1,COLOR_BLACK,COLOR_BLACK);
-	init_pair(2,COLOR_GREEN,COLOR_GREEN);
+	init_pair(2,COLOR_BLUE,COLOR_BLUE);
 	init_pair(3,COLOR_CYAN,COLOR_CYAN);
-	init_pair(4,COLOR_MAGENTA,COLOR_MAGENTA);
+	init_pair(4,COLOR_YELLOW,COLOR_YELLOW);
 	genmaze();
 	while(1){
 		draw();
