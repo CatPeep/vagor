@@ -101,7 +101,7 @@ void walk(){
 			else if(pdir < 0)pdir+=4;
 			break;
 		case 1:
-			if(f > 1800-tp && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
+			if(f > tp/25 && (int)floor((px-floor(px))*10) == 5 && (int)floor((py-floor(py))*10) == 5){m=0;f=0;}
 			else{
 				switch(pdir){
 					case 0:px+=0.000001*ws*tp;break;
