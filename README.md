@@ -18,7 +18,7 @@ make
 make install
 ```  
   
-## RUNNING IN YOUR TERMINAL
+## RUNNING
 ```vagor```  
 
 <img src='preview.png'></img>
