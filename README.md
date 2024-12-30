@@ -8,12 +8,12 @@ This program is written in C for Linux/GNU systems and utilizes the ncurses libr
 git clone https://github.com/CatPeep/vagor.git && cd vagor
 ```  
   
-3. Compile (gcc and ncurses must be installed)  
+2. Compile (gcc and ncurses must be installed)  
 ```
 make
 ```  
   
-4. Install (Run as root)  
+3. Install (Run as root)  
 ```
 make install
 ```  
